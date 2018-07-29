@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CODNITIVE
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE_EULA.html.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.codnitive.com/en/terms-of-service-softwares/
+ * http://www.codnitive.com/fa/terms-of-service-softwares/
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future.
+ *
+ * @category   Codnitive
+ * @package    Codnitive_MultilineAttr
+ * @author     Hassan Barza <support@codnitive.com>
+ * @copyright  Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ * @license    http://www.codnitive.com/en/terms-of-service-softwares/ End User License Agreement (EULA 1.0)
+ */
+-->
+<config>
+    <modules>
+        <Codnitive_MultilineAttr>
+            <version>1.1.11</version>
+            <title>Book Information</title>
+            <link><![CDATA[http://www.codnitive.com/]]></link>
+        </Codnitive_MultilineAttr>
+    </modules>
+    <global>
+        <models>
+            <multilineattr>
+                <class>Codnitive_MultilineAttr_Model</class>
+                <resourceModel>multilineattr_resource</resourceModel>
+            </multilineattr>
+            <multilineattr_resource>
+                <class>Codnitive_MultilineAttr_Model_Resource</class>
+                <deprecatedNode>multilineattr_mysql4</deprecatedNode>
+                <entities>
+                    <multiline>
+                        <table>codnitive_attribute_multiline</table>
+                    </multiline>
+                    <list>
+                        <table>codnitive_attribute_list</table>
+                    </list>
+                </entities>
+            </multilineattr_resource>
+            <catalogsearch_resource>
+                <rewrite>
+                    <advanced_collection>Codnitive_MultilineAttr_Model_Catalogsearch_Resource_Advanced_Collection</advanced_collection>
+                </rewrite>
+            </catalogsearch_resource>
+        </models>
+        <helpers>
+            <multilineattr>
+                <class>Codnitive_MultilineAttr_Helper</class>
+            </multilineattr>
+        </helpers>
+        <resources>
+            <multilineattr_setup>
+                <setup>
+                    <module>Codnitive_MultilineAttr</module>
+                    <class>Codnitive_MultilineAttr_Model_Resource_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </multilineattr_setup>
+            <multilineattr_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </multilineattr_write>
+            <multilineattr_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </multilineattr_read>
+        </resources>
+        
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <page_header>Codnitive_MultilineAttr_Block_Adminhtml_Page_Header</page_header>
+                </rewrite>
+            </adminhtml>
+            <multilineattr>
+                <class>Codnitive_MultilineAttr_Block</class>
+            </multilineattr>
+        </blocks>
+        <events>
+            <catalog_entity_attribute_save_before>
+                <observers>
+                    <multilineattr>
+                        <type>model</type>
+                        <class>multilineattr/observer</class>
+                        <method>assignBackendModelToAttribute</method>
+                    </multilineattr>
+                </observers>
+            </catalog_entity_attribute_save_before>
+            <catalog_product_save_before>
+                <observers>
+                    <multilineattr>
+                        <type>model</type>
+                        <class>multilineattr/observer</class>
+                        <method>updateListTextBaseValue</method>
+                    </multilineattr>
+                </observers>
+            </catalog_product_save_before>
+        </events>
+    </global>
+    
+    <admin>
+        <routers>
+            <multilineattr>
+                <use>admin</use>
+                <args>
+                    <module>Codnitive_MultilineAttr</module>
+                    <frontName>multilineattr</frontName>
+                </args>
+            </multilineattr>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <events>
+            <adminhtml_catalog_product_edit_prepare_form>
+                <observers>
+                    <multilineattr>
+                        <class>multilineattr/observer</class>
+                        <method>setMultilineRendererInForm</method>
+                    </multilineattr>
+                </observers>
+            </adminhtml_catalog_product_edit_prepare_form>
+            <adminhtml_catalog_product_form_prepare_excluded_field_list>
+                <observers>
+                    <multilineattr>
+                        <class>multilineattr/observer</class>
+                        <method>updateExcludedFieldList</method>
+                    </multilineattr>
+                </observers>
+            </adminhtml_catalog_product_form_prepare_excluded_field_list>
+            <adminhtml_product_attribute_types>
+                <observers>
+                    <multilineattr>
+                        <type>model</type>
+                        <class>multilineattr/observer</class>
+                        <method>addMultilineAttributeType</method>
+                    </multilineattr>
+                </observers>
+            </adminhtml_product_attribute_types>
+            <adminhtml_catalog_product_edit_element_types>
+                <observers>
+                    <multilineattr>
+                        <class>multilineattr/observer</class>
+                        <method>updateElementTypes</method>
+                    </multilineattr>
+                </observers>
+            </adminhtml_catalog_product_edit_element_types>
+        </events>
+        <attribute_search>
+            <list>
+                <class>multilineattr/search_list</class>
+                <acl>list</acl>
+            </list>
+        </attribute_search>
+        <layout>
+            <updates>
+                <multilineattr>
+                    <file>codnitive/multilineattr.xml</file>
+                </multilineattr>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Codnitive_Multilineattr>
+                    <files>
+                        <default>Codnitive_Multilineattr.csv</default>
+                    </files>
+                </Codnitive_Multilineattr>
+            </modules>
+        </translate>
+    </adminhtml>
+    
+    <default>
+        <general>
+            <validator_data>
+                <input_types>
+                    <multilineattr>multiline</multilineattr>
+                </input_types>
+            </validator_data>
+        </general>
+        <multilineattr>
+            <ajaxsearch>
+                <active>1</active>
+                <search_table>1</search_table>
+                <search_type>from_left</search_type>
+                <minchars>1</minchars>
+                <maxresault>10</maxresault>
+                <separator>new_line</separator>
+                <type>1</type>
+                <show_add>always</show_add>
+            </ajaxsearch>
+        </multilineattr>
+    </default>
+</config>

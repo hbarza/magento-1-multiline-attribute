@@ -1,0 +1,75 @@
+<?php
+/**
+ * CODNITIVE
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE_EULA.html.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.codnitive.com/en/terms-of-service-softwares/
+ * http://www.codnitive.com/fa/terms-of-service-softwares/
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future.
+ *
+ * @category   Codnitive
+ * @package    Codnitive_MultilineAttr
+ * @author     Hassan Barza <support@codnitive.com>
+ * @copyright  Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ * @license    http://www.codnitive.com/en/terms-of-service-softwares/ End User License Agreement (EULA 1.0)
+ */
+?>
+<ul>
+<?php foreach ($items as $item): ?>
+    <li id="<?php echo $item['id'] ?>" name="<?php echo $item['name'] ?>" style="min-height:20px; line-height:1.7em;">
+        <?php if (isset($item['button']) && $item['button']): ?>
+        <?php $searchMainTable = Mage::getModel('multilineattr/config')->searchMainTable() ?>
+        <?php if (!$searchMainTable): ?>
+        <div style="float:right;">
+            <button style="" onclick="var reloadurl = '<?php echo $this->getUrl('multilineattr/adminhtml_ajax_search/addToList/type/'.$item['type']) ?>';
+                                new Ajax.Request(reloadurl, {
+                                method: 'get',
+                                parameters: 'value=<?php echo $item['name'] ?>',
+                                onSuccess: function(response) {
+                                    addToListResult(response.responseText);
+                                },
+                                onFailure: function() {
+                                    content = '<ul><li style=\'min-height:20px; line-height:1.7em; color:red;\' class=\'selected\'><strong>There was a problem in Ajax connection.</strong></li></ul>';
+                                    addToListResult(content);
+                                }
+                            });
+                            function addToListResult(content) {
+                                element = 'attribute_search_autocomplete';
+                                $(element).innerHTML = '';
+                                $(element).innerHTML = content;
+                                new Effect.Appear($(element),{duration:0.15});
+
+                                document.observe('click', respondToClick);
+                                tabs = $$('#product_info_tabs li a');
+                                for(i=0; i<tabs.length; i++) {
+                                    $(tabs[i].getAttribute('id')).observe('click', respondToClick);
+                                }
+                            }
+                            function respondToClick(event) {
+                                new Effect.Fade($('attribute_search_autocomplete'),{duration:0.15});
+                            }" 
+                    class="scalable add" type="button" title="<?php echo $this->__('Add %s to List', $item['label']) ?>" id="add_<?php echo $item['type'] ?>_to_list">
+                <span><span><span><?php echo $this->__('Add %s to List', $item['label']) ?></span></span></span>
+            </button>
+        </div>
+        <?php endif; ?>
+            <?php if (isset($item['not_exists']) && $item['not_exists']): ?>
+            <strong><?php echo Mage::helper('multilineattr')->__('This %s not exists in list.', $item['label']) ?></strong>
+            <?php elseif (!$searchMainTable): ?>
+            <strong><?php echo Mage::helper('multilineattr')->__('Add this %s to list.', $item['label']) ?></strong>
+            <?php endif; ?>
+        <?php else: ?>
+        <div style="float:right; color:red; /*font-weight:bold;*/ font-size:9px;">[<?php echo $item['label'] ?>]</div>
+        <strong><?php echo $this->htmlEscape($item['name']) ?></strong>
+        <?php endif; ?>
+    </li>
+<?php endforeach ?>
+</ul>

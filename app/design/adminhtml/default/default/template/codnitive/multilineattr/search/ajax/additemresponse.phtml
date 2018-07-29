@@ -1,0 +1,43 @@
+<?php
+/**
+ * CODNITIVE
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE_EULA.html.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.codnitive.com/en/terms-of-service-softwares/
+ * http://www.codnitive.com/fa/terms-of-service-softwares/
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future.
+ *
+ * @category   Codnitive
+ * @package    Codnitive_MultilineAttr
+ * @author     Hassan Barza <support@codnitive.com>
+ * @copyright  Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ * @license    http://www.codnitive.com/en/terms-of-service-softwares/ End User License Agreement (EULA 1.0)
+ */
+?>
+<?php $status = $item['success'] ? 'success' : 'error' ?>
+<ul>
+    <li style="min-height:20px; line-height:1.7em; <?php if (!$item['success']) echo 'color:red;' ?>" id="<?php echo $item['type'] ?>_add_<?php echo $status ?> item_add_<?php echo $status ?>" class="selected" onclick="new Effect.Fade($('attribute_search_autocomplete'),{duration:0.15});">
+        <div style="float:right;">
+            <button onclick="new Effect.Fade($('attribute_search_autocomplete'),{duration:0.15});" class="scalable delete icon-btn delete-product-option" title="<?php echo $this->__('Close') ?>">
+                <span><span><span><?php echo $this->__('Close') ?></span></span></span>
+            </button>
+        </div>
+        <?php if ($item['success']): ?>
+            <?php if (isset($item['exists']) && $item['exists']): ?>
+            <strong><?php echo Mage::helper('multilineattr')->__("'%s' exists in list.", $item['title']) ?></strong>
+            <?php else: ?>
+            <strong><?php echo Mage::helper('multilineattr')->__('New %s added to list successfully.', $item['label']) ?></strong>
+            <?php endif; ?>
+        <?php else: ?>
+        <strong class="color:red;"><?php echo Mage::helper('multilineattr')->__('New %s could not add to list.', $item['label']) ?></strong>
+        <?php endif; ?>
+    </li>
+</ul>

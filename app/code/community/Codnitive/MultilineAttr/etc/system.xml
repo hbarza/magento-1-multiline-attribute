@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * CODNITIVE
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE_EULA.html.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.codnitive.com/en/terms-of-service-softwares/
+ * http://www.codnitive.com/fa/terms-of-service-softwares/
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade to newer
+ * versions in the future.
+ *
+ * @category   Codnitive
+ * @package    Codnitive_MultilineAttr
+ * @author     Hassan Barza <support@codnitive.com>
+ * @copyright  Copyright (c) 2012 CODNITIVE Co. (http://www.codnitive.com)
+ * @license    http://www.codnitive.com/en/terms-of-service-softwares/ End User License Agreement (EULA 1.0)
+ */
+-->
+<config>
+    <sections>
+        <multilineattr translate="label" module="multilineattr">
+            <label>Book Information</label>
+            <tab>codall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <ajaxsearch translate="label" module="multilineattr">
+                    <label>Ajax Search</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label,tooltip">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Enable ajax search for custom book information.</tooltip>
+                        </active>
+                        <active_attr translate="label,tooltip">
+                            <label>Use Ajax for</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>multilineattr/config_system_source_activeattr</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Select book information to enable ajax search for them.</tooltip>
+                        </active_attr>
+                        <search_table translate="label">
+                            <label>Search in Main Table</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </search_table>
+                        <search_type translate="label">
+                            <label>Search Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>multilineattr/config_system_source_searchtype</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip><![CDATA[Search Global, looks for query anywhere in string.<br />Search from begin, finds strings just are match from begin of query.]]></tooltip>
+                            <comment>Default: Search from Begin</comment>
+                        </search_type>
+                        <minchars translate="label,comment,tooltip">
+                            <label>Search Min Chars</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Ajax search will start after typing this number of characters.</tooltip>
+                            <comment>Default: 1</comment>
+                        </minchars>
+                        <maxresault translate="label,comment,tooltip">
+                            <label>Max Results</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Maximum number of search results to display.</tooltip>
+                            <comment>Default: 10, Unlimit: 0, First Result: -1</comment>
+                        </maxresault>
+                        <separator translate="label,tooltip">
+                            <label>Titles Separator</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>multilineattr/config_system_source_separator</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Define how separate book information titles to showing in store.</tooltip>
+                            <comment>Default: New Line</comment>
+                        </separator>
+                        <custom_separator translate="label">
+                            <label>Custom Separator</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>61</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <separator>custom</separator>
+                            </depends>
+                            <tooltip>Please, enter your custom separator.</tooltip>
+                        </custom_separator>
+                        <type translate="label,tooltip">
+                            <label>Just Show Current Type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Show search result just for current title type.</tooltip>
+                        </type>
+                        <show_add translate="label,tooltip,comment">
+                            <label>Add to List Button</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>multilineattr/config_system_source_addbutton</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <tooltip>Show Always, always shows add to list button at the end of search results, else button will be visible just when title not exists in list.</tooltip>
+                            <comment>Default: Show Always</comment>
+                        </show_add>
+                    </fields>
+                </ajaxsearch>
+            </groups>
+        </multilineattr>
+    </sections>
+</config>
